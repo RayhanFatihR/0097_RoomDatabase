@@ -1,7 +1,8 @@
 package com.example.a0097_roomdatabase.repositori
 
 import com.example.a0097_roomdatabase.room.SiswaDao
-import
+import com.example.a0097_roomdatabase.room.Siswa
+import kotlinx.coroutines.flow.Flow
 
 interface RepositoriSiswa {
     fun getAllSiswaStream(): Flow<List<Siswa>>
