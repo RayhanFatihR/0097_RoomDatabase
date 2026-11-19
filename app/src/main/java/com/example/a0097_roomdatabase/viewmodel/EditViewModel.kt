@@ -30,4 +30,11 @@ class EditViewModel(
     fun updateUiState(detailSiswa: DetailSiswa) {
         uiStateSiswa = UiStateSiswa(detailSiswa = detailSiswa, isEntryValid = validasiInput(detailSiswa))
     }
+
+    suspend fun updateSiswa() {
+        if (validasiInput(uiStateSiswa.detailSiswa)) {
+            repositoriSiswa.updateSiswa(uiStateSiswa.detailSiswa.toSiswa())
+        }
+    }
+
 }
