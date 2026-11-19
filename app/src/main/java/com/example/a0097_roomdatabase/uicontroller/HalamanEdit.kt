@@ -1,5 +1,6 @@
 package com.example.a0097_roomdatabase.uicontroller
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -12,9 +13,6 @@ import com.example.a0097_roomdatabase.view.route.DestinasiEditSiswa
 import com.example.a0097_roomdatabase.viewmodel.EditViewModel
 import com.example.a0097_roomdatabase.viewmodel.PenyediaViewModel
 import kotlinx.coroutines.launch
-
-class HalamanEdit {
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,5 +42,7 @@ fun EditSiswaScreen(
                     navigateBack()
                 }
             },
+            modifier = Modifier.padding(innerPadding)
         )
     }
+}

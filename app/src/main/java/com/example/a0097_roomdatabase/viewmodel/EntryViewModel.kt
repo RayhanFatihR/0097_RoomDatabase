@@ -11,11 +11,6 @@ class EntryViewModel(private val repositoriSiswa: RepositoriSiswa) : ViewModel()
     var uiStateSiswa by mutableStateOf(UiStateSiswa())
         private set
 
-    private fun validasiInput(detailSiswa: DetailSiswa = uiStateSiswa.detailSiswa): Boolean =
-        with(detailSiswa) {
-            nama.isNotBlank() && alamat.isNotBlank() && telpon.isNotBlank()
-        }
-
     fun updateUiState(detailSiswa: DetailSiswa) {
         uiStateSiswa = UiStateSiswa(
             detailSiswa = detailSiswa,
@@ -24,11 +19,16 @@ class EntryViewModel(private val repositoriSiswa: RepositoriSiswa) : ViewModel()
     }
 
     suspend fun saveSiswa() {
-        if (validasiInput()) {
+        if (validasiInput(uiStateSiswa.detailSiswa)) {
             repositoriSiswa.insertSiswa(uiStateSiswa.detailSiswa.toSiswa())
         }
     }
 }
+
+fun validasiInput(detailSiswa: DetailSiswa): Boolean =
+    with(detailSiswa) {
+        nama.isNotBlank() && alamat.isNotBlank() && telpon.isNotBlank()
+    }
 
 data class UiStateSiswa(
     val detailSiswa: DetailSiswa = DetailSiswa(),

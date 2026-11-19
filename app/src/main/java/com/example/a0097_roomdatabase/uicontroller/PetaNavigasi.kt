@@ -1,7 +1,7 @@
 package com.example.a0097_roomdatabase.uicontroller
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -12,25 +12,60 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.example.a0097_roomdatabase.R
 import com.example.a0097_roomdatabase.view.DestinasiEntry
 import com.example.a0097_roomdatabase.view.DestinasiHome
 import com.example.a0097_roomdatabase.view.EntrySiswaScreen
 import com.example.a0097_roomdatabase.view.HomeScreen
+import com.example.a0097_roomdatabase.view.route.DestinasiDetailSiswa
+import com.example.a0097_roomdatabase.view.route.DestinasiEditSiswa
 
 @Composable
-fun SiswaApp(navController: NavHostController = androidx.navigation.compose.rememberNavController()) {
+fun SiswaApp(navController: NavHostController = rememberNavController()) {
     NavHost(
         navController = navController,
         startDestination = DestinasiHome.route,
         modifier = Modifier
     ) {
         composable(DestinasiHome.route) {
-            HomeScreen(navigateToItemEntry = { navController.navigate(DestinasiEntry.route) })
+            HomeScreen(
+                navigateToItemEntry = { navController.navigate(DestinasiEntry.route) },
+                onSiswaClick = { id ->
+                    navController.navigate("${DestinasiDetailSiswa.route}/$id")
+                }
+            )
         }
         composable(DestinasiEntry.route) {
             EntrySiswaScreen(navigateBack = { navController.popBackStack() })
+        }
+        composable(
+            route = DestinasiDetailSiswa.routeWithArgs,
+            arguments = listOf(navArgument(DestinasiDetailSiswa.itemIdArg) {
+                type = NavType.IntType
+            })
+        ) {
+            DetailSiswaScreen(
+                navigateToEditItem = { id ->
+                    navController.navigate("${DestinasiEditSiswa.route}/$id")
+                },
+                navigateBack = { navController.popBackStack() }
+            )
+        }
+        composable(
+            route = DestinasiEditSiswa.routeWithArgs,
+            arguments = listOf(navArgument(DestinasiEditSiswa.itemIdArg) {
+                type = NavType.IntType
+            })
+        ) {
+            EditSiswaScreen(
+                navigateBack = { navController.popBackStack() },
+                onNavigateUp = { navController.navigateUp() }
+            )
         }
     }
 }
@@ -52,9 +87,9 @@ fun SiswaTopAppBar(
             if (canNavigateBack) {
                 IconButton(onClick = navigateUp) {
                     Icon(
-                        imageVector = Icons.Filled.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = stringResource(
-                            com.example.a0097_roomdatabase.R.string.back
+                            R.string.back
                         )
                     )
                 }

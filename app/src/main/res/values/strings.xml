@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Data Siswa</string>
     <string name="entry_siswa">Tambah Siswa</string>
+    <string name="edit_siswa">Edit Siswa</string>
+    <string name="detail_siswa">Detail Siswa</string>
     <string name="btn_submit">Simpan</string>
     <string name="nama">Nama</string>
     <string name="alamat">Alamat</string>
@@ -8,4 +10,9 @@
     <string name="required_field">Semua kolom wajib diisi.</string>
     <string name="deskripsi_no_item">Belum ada data siswa.</string>
     <string name="back">Kembali</string>
+    <string name="delete">Hapus</string>
+    <string name="attention">Perhatian</string>
+    <string name="tanya">Apakah Anda yakin ingin menghapus data ini?</string>
+    <string name="no">Tidak</string>
+    <string name="yes">Ya</string>
 </resources>
